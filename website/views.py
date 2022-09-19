@@ -9,7 +9,7 @@ views=Blueprint('views' , __name__)
  #setting navigations 
  
  #defining root
-@views.route('/login')
+@views.route('/')
 #defining function that will be returned when root is called
 def home():
     #returning the webpage to be displayed
