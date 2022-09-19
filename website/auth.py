@@ -4,13 +4,21 @@
 from flask import Blueprint , render_template
 
 #setting the blueprint for our flask application
-views=Blueprint('views' , __name__)
+auth=Blueprint('auth' , __name__)
 
  #setting navigations 
  
  #defining root
-@views.route('/login')
+@auth.route('/login')
 #defining function that will be returned when root is called
-def home():
+def login():
     #returning the webpage to be displayed
-    return render_template("home.html")
+    return render_template("login.html")
+
+ #defining root
+@auth.route('/sign-up')
+#defining function that will be returned when root is called
+def sign_up():
+    #returning the webpage to be displayed
+    return render_template("sign_up.html")
+    
