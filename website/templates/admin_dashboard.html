@@ -1,0 +1,38 @@
+{% extends "base.html" %}{% block title %} admin dashboard{% endblock %}
+{%block content%}
+<form method="POST">
+    <h3 align="center">Login</h3>
+    <div class="form-group">
+      <label for="carBrand">Car brand</label>
+      <input
+        type="text"
+        class="form-control"
+        id="carBrand"
+        name="carBrand"
+        placeholder="Enter Car Brand"
+      />
+    </div>
+    <div class="form-group">
+      <label for="seats">seats</label>
+      <input
+        type="text"
+        class="form-control"
+        id="seats"
+        name="seats"
+        placeholder="Enter number of seats"
+      />
+    </div>
+    <div class="form-group">
+        <label for="costs">Cost/hr</label>
+        <input
+          type="text"
+          class="form-control"
+          id="costs"
+          name="costs"
+          placeholder="Enter costs eg $20.00"
+        />
+      </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Add a vehicle</button>
+  </form>
+{%endblock%}

@@ -1,5 +1,5 @@
 from flask import Blueprint , render_template , request , flash , redirect , url_for
-from .models import User
+from .models import User , Books
 from . import db
 from werkzeug.security import generate_password_hash , check_password_hash
 from flask_login import login_user , login_required , logout_user , current_user
@@ -59,4 +59,26 @@ def sign_up():
             flash('Account created!' , category='success')
             return redirect(url_for('views.home'))
             pass
-    return render_template("sign_up.html" , user=current_user)
+    return render_template("sign-up.html" , user=current_user)
+@auth.route('/booking-history')
+@login_required
+#defining function that will be returned when root is called
+def booking_history():
+    #returning the webpage to be displayed
+    return render_template("booking_history.html" , user=current_user)
+
+@auth.route('/dashboard' , methods=['GET' , 'POST'])
+@login_required
+#defining function that will be returned when root is called
+def dashboard():
+    if request.method == 'POST':
+        carBrand = request.form.get('carBrand')
+        seats = request.form.get('seats')
+        costs = request.form.get('costs')
+        
+        new_book = Books(carBrand = carBrand , numberOfSeats = seats , costs = costs , user_id=current_user.id)
+        db.session.add(new_book)
+        db.session.commit()
+        flash('Note added!' , category='success')
+            
+    return render_template("admin_dashboard.html" , user=current_user)

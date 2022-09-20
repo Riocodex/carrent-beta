@@ -1,0 +1,11 @@
+.formStuff{
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+}
+.formStuffDiv{
+    padding: 10px;
+}
+.formStuffDiv img{
+    width: 50%;
+}

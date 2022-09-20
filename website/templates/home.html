@@ -1,12 +1,33 @@
-{% extends "base.html" %}{% block title %}Home{% endblock %}
+{% extends "base.html" %}{% block title %} car Home{% endblock %}
 {%block content%}
 
 
 <form  method="POST">
-    <textarea name="note" id="note" class="form-control"></textarea>
-    <br/> 
-    <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
-    </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">car id</th>
+        <th scope="col">Car Brand</th>
+        <th scope="col">Number of seats</th>
+        <th scope="col">Costs/hr</th>
+        <!-- <th scope="col"></th> -->
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in user.books%}
+      <tr>
+        <th scope="row">1</th>
+        <td>{{book.id}}</td>
+        <td>{{book.carBrand}}</td>
+        <td>{{book.numberOfSeats}}</td>
+        <td>{{book.costs}}</td>
+       <td> <button type="submit" class="btn btn-primary">Book</button></td>
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+     
+  </table>
 </form>
 {%endblock%}
