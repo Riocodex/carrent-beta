@@ -75,10 +75,13 @@ def dashboard():
         carBrand = request.form.get('carBrand')
         seats = request.form.get('seats')
         costs = request.form.get('costs')
-        
-        new_book = Books(carBrand = carBrand , numberOfSeats = seats , costs = costs , user_id=current_user.id)
-        db.session.add(new_book)
-        db.session.commit()
-        flash('Note added!' , category='success')
-            
+        if len(carBrand) < 2:
+            flash('Car brand name too small' , category='error')
+        elif len(seats) < 1:
+            flash('input number of seats' , category='error')
+        else:
+            new_book = Books(carBrand = carBrand , numberOfSeats = seats , costs = costs , user_id=current_user.id)
+            db.session.add(new_book)
+            db.session.commit()
+            flash('car Booked!' , category='success')
     return render_template("admin_dashboard.html" , user=current_user)
