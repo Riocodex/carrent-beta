@@ -1,5 +1,5 @@
 from flask import Blueprint , render_template , request , flash , redirect , url_for
-from .models import User , Books
+from .models import User , Books , ResetRequestForm
 from . import db
 from werkzeug.security import generate_password_hash , check_password_hash
 from flask_login import login_user , login_required , logout_user , current_user
@@ -85,3 +85,10 @@ def dashboard():
             db.session.commit()
             flash('car Booked!' , category='success')
     return render_template("admin_dashboard.html" , user=current_user)
+
+@auth.route('/reset_password' , methods=['GET' , 'POST'])
+def reset_request():
+    form = ResetRequestForm()
+    if form.validate_on_submit():
+        flash('Reset request sent. Check your email' , 'success')
+    return render_template('reset_request.html' , title='Reset Request' , form = form , user=current_user , legend = 'Reset Password') 

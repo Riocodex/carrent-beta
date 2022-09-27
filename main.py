@@ -7,3 +7,4 @@ if __name__ == '__main__':
     #to continue debuggin whenever we reset the server we set the debuggin to true
     app.run(debug=True)
     
+    

@@ -11,6 +11,8 @@ def create_app():
     
     app.config['SECRET_KEY'] = 'fdajdpf djpf' #this code here is the secret key to the website..
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_BINDS'] = {'two' : 'sqlite:////mnt/c/Users/Onwuka Rosario/Documents/CODE/python/carrentalbeta/website/book_database.db'}
     db.init_app(app)
     
   
@@ -23,8 +25,10 @@ def create_app():
     app.register_blueprint(views , url_prefix = '/')
     app.register_blueprint(auth , url_prefix = '/')
     
-    from .models import User 
+    from .models import User , Books
     create_database(app)
+    
+    
     
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'

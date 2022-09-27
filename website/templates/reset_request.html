@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
     %}
     <form method="POST">
-      <h3 align="center">Login</h3>
+      <h3 align="center">{{legend}}</h3>
       <div class="form-group">
         <label for="email">Email Address</label>
         <input
@@ -12,20 +12,9 @@
           placeholder="Enter email"
         />
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          name="password"
-          placeholder="Enter password"
-        />
-      </div>
       <br />
      <div class="form-group mt-2">
-      <button type="submit" class="btn btn-primary">Login</button>
-      <a href="{{url_for('auth.reset_request')}}">Forgot Password?</a>
+      <button type="submit" class="btn btn-primary">Reset Password</button>
      </div>
     </form>
     {% endblock %}  
