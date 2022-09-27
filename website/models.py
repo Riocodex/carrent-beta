@@ -1,5 +1,6 @@
-from . import db
+from . import db , create_app
 from flask_login import UserMixin
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from sqlalchemy.sql import func
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField , SubmitField
@@ -20,7 +21,21 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     books = db.relationship('Books' , lazy = 'dynamic' , backref=db.backref('category' , lazy=True))
-  
+    
+    def get_token(self , expires_sec = 300):
+        serial = Serializer( create_app.config['SECRET_KEY'] , expires_in = expires_sec)
+        return serial.dumps({'user_id':self.id}).decode('utf-8')
+    
+    @staticmethod
+    def verify_token(token):
+        serial = Serializer( create_app.config['SECRET_KEY'] )
+        try:
+            user_id = serial.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
+    
+    
 class ResetRequestForm(FlaskForm):
     email = StringField(label ='Email' , validators=[DataRequired()])
-    password = PasswordField(label='Reset Password' , validators=[DataRequired()])
+    submit = SubmitField(label='Reset Password' , validators=[DataRequired()])
